@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reto 4: Día Nevado Soleado - Khan Academy</title>
+  <link rel="stylesheet" href="../styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Reto 4: Día Nevado Soleado</h1>
+    <nav>
+      <a href="../index.html">Inicio</a>
+      <a href="rana.html">1. Rana</a>
+      <a href="dientes-conejo.html">2. Dientes de Conejo</a>
+      <a href="que-hay-de-cena.html">3. ¿Qué hay de cena?</a>
+      <a href="dia-nevado.html" class="active">4. Día Nevado</a>
+      <a href="muneco-nieve.html">5. Muñeco de Nieve</a>
+      <a href="../dom-inspector.html" class="btn-highlight">Árbol DOM</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Lienzo Renderizado (p5.js)</h2>
+      <div class="canvas-container" id="sketch-container"></div>
+      <div class="controls-bar">
+        <button onclick="redraw()" class="btn-action">🔄 Redibujar</button>
+        <button onclick="saveCanvas('reto-dia-nevado', 'png')" class="btn-action">💾 Descargar PNG</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Código Fuente Adaptado</h2>
+      <pre><code>function setup() {
+  let canvas = createCanvas(400, 400);
+  canvas.parent('sketch-container');
+  noLoop();
+}
+
+function draw() {
+  // Background
+  background(26, 188, 186);
+
+  // The ground
+  noStroke();
+  fill(87, 245, 90);
+  rect(0, 300, 400, 100);  
+
+  // The sun
+  fill(255, 215, 0);
+  ellipse(80, 64, 100, 100);
+
+  // The snowman
+  fill(255, 255, 255);
+  ellipse(200, 300, 150, 150);
+  ellipse(200, 200, 100, 100);
+  ellipse(200, 120, 75, 75);
+}</code></pre>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 - Laboratorio de Gráficos Web | Despliegue en GitHub Pages</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    function setup() {
+      let canvas = createCanvas(400, 400);
+      canvas.parent('sketch-container');
+      noLoop();
+    }
+
+    function draw() {
+      background(26, 188, 186);
+
+      noStroke();
+      fill(87, 245, 90);
+      rect(0, 300, 400, 100);
+
+      fill(255, 215, 0);
+      ellipse(80, 64, 100, 100);
+
+      fill(255, 255, 255);
+      ellipse(200, 300, 150, 150);
+      ellipse(200, 200, 100, 100);
+      ellipse(200, 120, 75, 75);
+    }
+  </script>
+</body>
+</html>

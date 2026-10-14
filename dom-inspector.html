@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inspector del Árbol DOM - Sitio Completo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Inspector Gráfico del Árbol del DOM</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="proyectos/rana.html">1. Rana</a>
+      <a href="proyectos/dientes-conejo.html">2. Dientes de Conejo</a>
+      <a href="proyectos/que-hay-de-cena.html">3. ¿Qué hay de cena?</a>
+      <a href="proyectos/dia-nevado.html">4. Día Nevado</a>
+      <a href="proyectos/muneco-nieve.html">5. Muñeco de Nieve</a>
+      <a href="dom-inspector.html" class="active btn-highlight">Árbol DOM</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Visualización Jerárquica del Document Object Model</h2>
+      <p>Selecciona cualquiera de las páginas del proyecto para inspeccionar gráficamente su estructura jerárquica de nodos desde la raíz (<code>&lt;html&gt;</code>) hasta los elementos terminales (<code>&lt;canvas&gt;</code>, <code>&lt;script&gt;</code>, etc.):</p>
+      
+      <div style="margin-top: 1rem;">
+        <label for="pageSelector"><strong>Página a examinar: </strong></label>
+        <select id="pageSelector" style="padding: 6px 12px; border-radius: 4px; border: 1px solid #cbd5e1; font-size: 0.95rem;">
+          <option value="index">index.html (Página Principal)</option>
+          <option value="rana">proyectos/rana.html (Reto 1: La Rana)</option>
+          <option value="dientes">proyectos/dientes-conejo.html (Reto 2: Dientes de Conejo)</option>
+          <option value="cena">proyectos/que-hay-de-cena.html (Reto 3: ¿Qué hay de cena?)</option>
+          <option value="diaNevado">proyectos/dia-nevado.html (Reto 4: Día Nevado Soleado)</option>
+          <option value="munecoNieve">proyectos/muneco-nieve.html (Reto 5: Muñeco de Nieve)</option>
+          <option value="inspector">dom-inspector.html (Inspector del DOM)</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="tree-wrapper">
+        <div class="tree" id="treeContainer"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 - Laboratorio de Gráficos Web | Despliegue en GitHub Pages</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/dom-tree.js"></script>
+</body>
+</html>

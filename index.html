@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portafolio de Gráficos Web - Khan Academy a Nativo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Proyectos de Khan Academy</h1>
+    <nav>
+      <a href="index.html" class="active">Inicio</a>
+      <a href="proyectos/rana.html">1. Rana</a>
+      <a href="proyectos/dientes-conejo.html">2. Dientes de Conejo</a>
+      <a href="proyectos/que-hay-de-cena.html">3. ¿Qué hay de cena?</a>
+      <a href="proyectos/dia-nevado.html">4. Día Nevado</a>
+      <a href="proyectos/muneco-nieve.html">5. Muñeco de Nieve</a>
+      <a href="dom-inspector.html" class="btn-highlight">Árbol DOM</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Ficha Técnica de Entrega -->
+    <section class="card meta-info">
+      <div class="meta-grid">
+        <div>
+          <p><strong>Materia:</strong> Programación Web / Computación Gráfica</p>
+          <p><strong>Actividad:</strong> Migración de Gráficos Khan Academy a Web Nativa</p>
+        </div>
+        <div>
+          <p><strong>Tecnologías:</strong> HTML5 Canvas, CSS3, JavaScript, p5.js</p>
+          <p><strong>Código Fuente:</strong> <a href="https://github.com" target="_blank" class="link-repo">Ver Repositorio en GitHub ↗</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Transformación de Gráficos: Khan Academy a Entorno Web Nativo</h2>
+      <p>En este sitio se recopilan los retos y proyectos originalmente desarrollados en el entorno educativo de Khan Academy, adaptados para ejecutarse en navegadores web modernos mediante código estándar con la API de HTML5 Canvas y la biblioteca p5.js.</p>
+    </section>
+
+    <!-- Fundamentos Teóricos: Canvas 2D -->
+    <section class="card">
+      <h2>1. El elemento HTML &lt;canvas&gt; y el Contexto de Renderizado 2D</h2>
+      <p>La etiqueta <code>&lt;canvas&gt;</code> define un área de mapa de bits dependiente de resolución. Por sí misma no posee capacidad de dibujo; delega toda la renderización a una interfaz de programación de aplicaciones (API) en JavaScript a través del contexto 2D (<code>'2d'</code>).</p>
+      <pre><code>const canvas = document.getElementById('miCanvas');
+const ctx = canvas.getContext('2d');
+
+// Ejemplo de trazado nativo
+ctx.fillStyle = '#6366f1';
+ctx.fillRect(20, 20, 100, 60);
+
+ctx.beginPath();
+ctx.arc(200, 50, 30, 0, Math.PI * 2);
+ctx.fillStyle = '#10b981';
+ctx.fill();</code></pre>
+      <p>El contexto 2D gestiona primitivas vectoriales mediante trazados manuales (<code>beginPath()</code>, <code>moveTo()</code>, <code>lineTo()</code>, <code>arc()</code>), transformaciones euclidianas y composición de color directa sobre píxeles.</p>
+      
+      <!-- Demostración en vivo Canvas Nativo -->
+      <div class="demo-box">
+        <h3>Demostración en Vivo: Renderizado Canvas 2D Nativo</h3>
+        <p class="subtitle">Este lienzo se dibuja mediante la API nativa de JavaScript sin librerías externas:</p>
+        <div class="canvas-container">
+          <canvas id="demoCanvasNativo" width="360" height="130"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fundamentos Teóricos: p5.js -->
+    <section class="card">
+      <h2>2. Fundamentos de la Librería p5.js</h2>
+      <p><strong>p5.js</strong> es una biblioteca de JavaScript orientada a la programación visual interactiva basada en la filosofía de Processing. Abstrae la manipulación de bajo nivel del elemento <code>&lt;canvas&gt;</code> organizando la lógica mediante su ciclo de vida estándar:</p>
+      <ul>
+        <li><code>setup()</code>: Función que se ejecuta una sola vez al cargar la página. Inicializa el tamaño del lienzo (<code>createCanvas()</code>), modos de color y configuraciones estáticas.</li>
+        <li><code>draw()</code>: Ciclo continuo de renderizado (típicamente a 60 cuadros por segundo) para animaciones e interactividad reactiva a eventos periféricos (mouse, teclado). Para gráficos fijos se desactiva con <code>noLoop()</code>.</li>
+      </ul>
+      <p>El dialecto gráfico de Khan Academy está fundamentado en este mismo paradigma, permitiendo una migración con paridad casi total de coordenadas y funciones como <code>ellipse()</code>, <code>rect()</code>, <code>fill()</code> y <code>stroke()</code>.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 - Laboratorio de Gráficos Web | Despliegue en GitHub Pages</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Dibujo inmediato en el canvas nativo de demostración
+    (function renderDemo() {
+      const cn = document.getElementById('demoCanvasNativo');
+      if (!cn) return;
+      const ctx = cn.getContext('2d');
+
+      // Fondo
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(0, 0, cn.width, cn.height);
+
+      // Rectángulo con gradiente
+      const grad = ctx.createLinearGradient(30, 0, 130, 0);
+      grad.addColorStop(0, '#6366f1');
+      grad.addColorStop(1, '#a855f7');
+      ctx.fillStyle = grad;
+      ctx.fillRect(30, 30, 90, 70);
+
+      // Círculo nativo con trazo
+      ctx.beginPath();
+      ctx.arc(190, 65, 35, 0, Math.PI * 2);
+      ctx.fillStyle = '#10b981';
+      ctx.fill();
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = '#ffffff';
+      ctx.stroke();
+
+      // Triángulo
+      ctx.beginPath();
+      ctx.moveTo(270, 95);
+      ctx.lineTo(330, 95);
+      ctx.lineTo(300, 30);
+      ctx.closePath();
+      ctx.fillStyle = '#f59e0b';
+      ctx.fill();
+    })();
+  </script>
+</body>
+</html>
