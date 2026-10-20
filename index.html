@@ -1,50 +1,116 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portafolio de Gráficos Web - Khan Academy a Nativo</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khan Academy | Laboratorio Web</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 </head>
 <body>
-  <header>
-    <h1>Proyectos de Khan Academy</h1>
-    <nav>
-      <a href="index.html" class="active">Inicio</a>
-      <a href="proyectos/rana.html">1. Rana</a>
-      <a href="proyectos/dientes-conejo.html">2. Dientes de Conejo</a>
-      <a href="proyectos/que-hay-de-cena.html">3. ¿Qué hay de cena?</a>
-      <a href="proyectos/dia-nevado.html">4. Día Nevado</a>
-      <a href="proyectos/muneco-nieve.html">5. Muñeco de Nieve</a>
-      <a href="dom-inspector.html" class="btn-highlight">Árbol DOM</a>
-    </nav>
-  </header>
 
-  <main>
-    <!-- Ficha Técnica de Entrega -->
-    <section class="card meta-info">
-      <div class="meta-grid">
-        <div>
-          <p><strong>Materia:</strong> Programación Web / Computación Gráfica</p>
-          <p><strong>Actividad:</strong> Migración de Gráficos Khan Academy a Web Nativa</p>
+  <div class="app-container">
+
+    <!-- ================= BARRA LATERAL ================= -->
+    <aside class="sidebar">
+      
+      <!-- Menú vertical -->
+      <nav class="nav-menu">
+        <!-- Inicio -->
+        <a href="#inicio" class="nav-item active" id="btn-nav-inicio">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          <span>Inicio</span>
+        </a>
+
+        <!-- Acordeón: Práctica 1 -->
+        <div class="accordion-group open">
+          <button class="nav-item accordion-trigger" type="button">
+            <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            <span>Práctica 1</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="submenu">
+            <button class="submenu-item" data-file="proyectos/rana.html">🐸 Rana</button>
+            <button class="submenu-item" data-file="proyectos/dientes-conejo.html">🐰 Dientes de conejo</button>
+            <button class="submenu-item" data-file="proyectos/que-hay-de-cena.html">🍽️ ¿Qué hay de cena?</button>
+            <button class="submenu-item" data-file="proyectos/dia-nevado.html">❄️ Día nevado</button>
+            <button class="submenu-item" data-file="proyectos/muneco-nieve.html">⛄ Muñeco de nieve</button>
+          </div>
         </div>
-        <div>
-          <p><strong>Tecnologías:</strong> HTML5 Canvas, CSS3, JavaScript, p5.js</p>
-          <p><strong>Código Fuente:</strong> <a href="https://github.com" target="_blank" class="link-repo">Ver Repositorio en GitHub ↗</a></p>
+
+        <!-- Acordeón: Práctica 2 -->
+        <div class="accordion-group open">
+          <button class="nav-item accordion-trigger" type="button">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+            <span>Práctica 2</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="submenu">
+            <button class="submenu-item" data-file="proyectos/sol-explota.html">☀️ El sol que explota</button>
+            <button class="submenu-item" data-file="proyectos/nubes-separan.html">☁️ Nubes que se separan</button>
+            <button class="submenu-item" data-file="proyectos/estrella-fugaz.html">🌠 Estrella fugaz</button>
+          </div>
         </div>
-      </div>
-    </section>
 
-    <section class="card">
-      <h2>Transformación de Gráficos: Khan Academy a Entorno Web Nativo</h2>
-      <p>En este sitio se recopilan los retos y proyectos originalmente desarrollados en el entorno educativo de Khan Academy, adaptados para ejecutarse en navegadores web modernos mediante código estándar con la API de HTML5 Canvas y la biblioteca p5.js.</p>
-    </section>
+        <!-- DOM Inspector -->
+        <button class="nav-item" id="btn-nav-dom">
+          <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+          <span>DOM Inspector</span>
+        </button>
 
-    <!-- Fundamentos Teóricos: Canvas 2D -->
-    <section class="card">
-      <h2>1. El elemento HTML &lt;canvas&gt; y el Contexto de Renderizado 2D</h2>
-      <p>La etiqueta <code>&lt;canvas&gt;</code> define un área de mapa de bits dependiente de resolución. Por sí misma no posee capacidad de dibujo; delega toda la renderización a una interfaz de programación de aplicaciones (API) en JavaScript a través del contexto 2D (<code>'2d'</code>).</p>
-      <pre><code>const canvas = document.getElementById('miCanvas');
+        <div class="nav-divider"></div>
+
+        <a href="https://github.com/dahirmiguelmartinezortiz-star/Proyectos_KhanAcademy" target="_blank" class="nav-item">
+          <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          <span>Repositorio GitHub</span>
+        </a>
+      </nav>
+
+    </aside>
+
+    <!-- ================= PANEL PRINCIPAL ================= -->
+    <main class="main-panel">
+
+      <!-- VISTA 1: INICIO -->
+      <div id="view-inicio" class="view-container">
+        
+        <div class="content-card meta-box">
+          <div class="meta-row">
+            <div>
+              <span class="meta-label">Materia:</span>
+              <span class="meta-value">Programación Web / Computación Gráfica</span>
+            </div>
+            <div>
+              <span class="meta-label">Tecnologías:</span>
+              <span class="meta-value">HTML5 Canvas, CSS3, JavaScript, p5.js</span>
+            </div>
+          </div>
+          <div class="meta-row" style="margin-top: 10px;">
+            <div>
+              <span class="meta-label">Actividad:</span>
+              <span class="meta-value">Migración de Gráficos Khan Academy a Web Nativa</span>
+            </div>
+            <div>
+              <span class="meta-label">Código Fuente:</span>
+              <a href="https://github.com/dahirmiguelmartinezortiz-star/Proyectos_KhanAcademy" target="_blank" class="meta-link">Ver Repositorio en GitHub ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <h2 class="card-main-title">Transformación de Gráficos: Khan Academy a Entorno Web Nativo</h2>
+          <p class="card-text">
+            En este sitio se recopilan los retos y proyectos originalmente desarrollados en el entorno educativo de Khan Academy, adaptados para ejecutarse en navegadores web modernos mediante código estándar con la API de HTML5 Canvas y la biblioteca p5.js.
+          </p>
+        </div>
+
+        <div class="content-card">
+          <h3 class="section-title">1. El elemento HTML &lt;canvas&gt; y el Contexto de Renderizado 2D</h3>
+          <p class="card-text">
+            La etiqueta <code>&lt;canvas&gt;</code> define un área de mapa de bits dependiente de resolución. Por sí misma no posee capacidad de dibujo; delega toda la renderización a una interfaz de programación de aplicaciones (API) en JavaScript a través del contexto 2D (<code>'2d'</code>).
+          </p>
+
+          <pre class="code-block"><code>const canvas = document.getElementById('miCanvas');
 const ctx = canvas.getContext('2d');
 
 // Ejemplo de trazado nativo
@@ -55,71 +121,448 @@ ctx.beginPath();
 ctx.arc(200, 50, 30, 0, Math.PI * 2);
 ctx.fillStyle = '#10b981';
 ctx.fill();</code></pre>
-      <p>El contexto 2D gestiona primitivas vectoriales mediante trazados manuales (<code>beginPath()</code>, <code>moveTo()</code>, <code>lineTo()</code>, <code>arc()</code>), transformaciones euclidianas y composición de color directa sobre píxeles.</p>
-      
-      <!-- Demostración en vivo Canvas Nativo -->
-      <div class="demo-box">
-        <h3>Demostración en Vivo: Renderizado Canvas 2D Nativo</h3>
-        <p class="subtitle">Este lienzo se dibuja mediante la API nativa de JavaScript sin librerías externas:</p>
-        <div class="canvas-container">
-          <canvas id="demoCanvasNativo" width="360" height="130"></canvas>
+
+          <p class="card-text">
+            El contexto 2D gestiona primitivas vectoriales mediante trazados manuales (<code>beginPath()</code>, <code>moveTo()</code>, <code>lineTo()</code>, <code>arc()</code>), transformaciones euclidianas y composición de color directa sobre píxeles.
+          </p>
+
+          <div class="demo-box">
+            <h4 class="demo-title">Demostración en Vivo: Renderizado Canvas 2D Nativo</h4>
+            <p class="demo-subtitle">Este lienzo se dibuja mediante la API nativa de JavaScript sin librerías externas:</p>
+            <div class="canvas-center">
+              <canvas id="nativeCanvasDemo" width="360" height="120"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <h3 class="section-title">2. Fundamentos de la Librería p5.js</h3>
+          <p class="card-text">
+            <strong>p5.js</strong> es una biblioteca de JavaScript orientada a la programación visual interactiva basada en la filosofía de Processing. Abstrae la manipulación de bajo nivel del elemento <code>&lt;canvas&gt;</code> organizando la lógica mediante su ciclo de vida estándar:
+          </p>
+          <ul class="card-list">
+            <li><strong><code>setup()</code>:</strong> Función que se ejecuta una sola vez al cargar la página. Inicializa el tamaño del lienzo (<code>createCanvas()</code>), modos de color y configuraciones estáticas.</li>
+            <li><strong><code>draw()</code>:</strong> Ciclo continuo de renderizado (típicamente a 60 cuadros por segundo) para animaciones e interactividad reactiva a eventos periféricos. Para gráficos fijos se desactiva con <code>noLoop()</code>.</li>
+          </ul>
+        </div>
+
+        <footer class="page-footer">
+          © 2026 - Laboratorio de Gráficos Web | Despliegue en GitHub Pages
+        </footer>
+      </div>
+
+      <!-- VISTA 2: PROYECTO SELECCIONADO (CANVAS + CÓDIGO) -->
+      <div id="view-project" class="view-container" style="display: none;">
+        <div class="project-view-header">
+          <h2 id="projectTitleDisplay" class="project-view-title">Proyecto</h2>
+          <button class="btn-back btn-to-home">← Volver al Inicio</button>
+        </div>
+
+        <!-- Tarjeta 1: Canvas Renderizado -->
+        <div class="content-card">
+          <h3 class="section-title">Lienzo Renderizado (p5.js)</h3>
+          <div class="canvas-container">
+            <div id="sketch-container"></div>
+          </div>
+          <div class="controls-bar">
+            <button id="btnRedrawProject" class="btn-action">🔄 Reiniciar / Redibujar</button>
+            <button id="btnSaveProject" class="btn-action">💾 Descargar PNG</button>
+          </div>
+        </div>
+
+        <!-- Tarjeta 2: Código Fuente Limpio -->
+        <div class="content-card">
+          <h3 class="section-title">Código Fuente Adaptado</h3>
+          <pre class="code-block"><code id="projectCodeText"></code></pre>
         </div>
       </div>
-    </section>
 
-    <!-- Fundamentos Teóricos: p5.js -->
-    <section class="card">
-      <h2>2. Fundamentos de la Librería p5.js</h2>
-      <p><strong>p5.js</strong> es una biblioteca de JavaScript orientada a la programación visual interactiva basada en la filosofía de Processing. Abstrae la manipulación de bajo nivel del elemento <code>&lt;canvas&gt;</code> organizando la lógica mediante su ciclo de vida estándar:</p>
-      <ul>
-        <li><code>setup()</code>: Función que se ejecuta una sola vez al cargar la página. Inicializa el tamaño del lienzo (<code>createCanvas()</code>), modos de color y configuraciones estáticas.</li>
-        <li><code>draw()</code>: Ciclo continuo de renderizado (típicamente a 60 cuadros por segundo) para animaciones e interactividad reactiva a eventos periféricos (mouse, teclado). Para gráficos fijos se desactiva con <code>noLoop()</code>.</li>
-      </ul>
-      <p>El dialecto gráfico de Khan Academy está fundamentado en este mismo paradigma, permitiendo una migración con paridad casi total de coordenadas y funciones como <code>ellipse()</code>, <code>rect()</code>, <code>fill()</code> y <code>stroke()</code>.</p>
-    </section>
-  </main>
+      <!-- VISTA 3: INSPECTOR DEL ÁRBOL DOM -->
+      <div id="view-dom" class="view-container" style="display: none;">
+        
+        <div class="content-card">
+          <div class="project-view-header" style="margin-bottom: 12px;">
+            <h2 class="project-view-title">Visualización Jerárquica del Document Object Model</h2>
+            <button class="btn-back btn-to-home">← Volver al Inicio</button>
+          </div>
+          <p class="card-text">
+            Selecciona cualquiera de las páginas del proyecto para inspeccionar gráficamente su estructura jerárquica de nodos desde la raíz (<code>&lt;html&gt;</code>) hasta los elementos terminales (<code>&lt;canvas&gt;</code>, <code>&lt;script&gt;</code>, etc.):
+          </p>
+          <div class="dom-selector-row">
+            <label for="domPageSelect">Página a examinar:</label>
+            <select id="domPageSelect" class="dom-select">
+              <optgroup label="Práctica 1">
+                <option value="proyectos/rana.html">proyectos/rana.html (Reto 1: La Rana)</option>
+                <option value="proyectos/dientes-conejo.html">proyectos/dientes-conejo.html (Reto 2: Dientes de Conejo)</option>
+                <option value="proyectos/que-hay-de-cena.html">proyectos/que-hay-de-cena.html (Reto 3: ¿Qué hay de cena?)</option>
+                <option value="proyectos/dia-nevado.html" selected>proyectos/dia-nevado.html (Reto 4: Día Nevado Soleado)</option>
+                <option value="proyectos/muneco-nieve.html">proyectos/muneco-nieve.html (Reto 5: Muñeco de Nieve)</option>
+              </optgroup>
+              <optgroup label="Práctica 2">
+                <option value="proyectos/sol-explota.html">proyectos/sol-explota.html (El sol que explota)</option>
+                <option value="proyectos/nubes-separan.html">proyectos/nubes-separan.html (Nubes que se separan)</option>
+                <option value="proyectos/estrella-fugaz.html">proyectos/estrella-fugaz.html (Estrella fugaz)</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
 
-  <footer>
-    <p>&copy; 2026 - Laboratorio de Gráficos Web | Despliegue en GitHub Pages</p>
-  </footer>
+        <div class="content-card">
+          <div class="dom-status-bar">
+            <span id="domNodeCount">Analizando estructura...</span>
+            <span class="hint-badge">↔ Desplazamiento horizontal disponible</span>
+          </div>
 
-  <script src="js/main.js"></script>
+          <div class="tree-scroll-container" id="domScrollContainer">
+            <canvas id="domCanvas"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
   <script>
-    // Dibujo inmediato en el canvas nativo de demostración
-    (function renderDemo() {
-      const cn = document.getElementById('demoCanvasNativo');
-      if (!cn) return;
-      const ctx = cn.getContext('2d');
-
-      // Fondo
-      ctx.fillStyle = '#0f172a';
-      ctx.fillRect(0, 0, cn.width, cn.height);
-
-      // Rectángulo con gradiente
-      const grad = ctx.createLinearGradient(30, 0, 130, 0);
-      grad.addColorStop(0, '#6366f1');
-      grad.addColorStop(1, '#a855f7');
-      ctx.fillStyle = grad;
-      ctx.fillRect(30, 30, 90, 70);
-
-      // Círculo nativo con trazo
+    // 1. DIBUJO ESTÁTICO DE INICIO (Canvas 2D)
+    const canvasDemo = document.getElementById('nativeCanvasDemo');
+    if (canvasDemo) {
+      const ctx = canvasDemo.getContext('2d');
+      ctx.fillStyle = '#6366f1';
+      ctx.fillRect(40, 30, 70, 60);
       ctx.beginPath();
-      ctx.arc(190, 65, 35, 0, Math.PI * 2);
+      ctx.arc(170, 60, 30, 0, Math.PI * 2);
       ctx.fillStyle = '#10b981';
       ctx.fill();
-      ctx.lineWidth = 3;
-      ctx.strokeStyle = '#ffffff';
-      ctx.stroke();
-
-      // Triángulo
       ctx.beginPath();
-      ctx.moveTo(270, 95);
-      ctx.lineTo(330, 95);
-      ctx.lineTo(300, 30);
+      ctx.moveTo(290, 30);
+      ctx.lineTo(255, 90);
+      ctx.lineTo(325, 90);
       ctx.closePath();
       ctx.fillStyle = '#f59e0b';
       ctx.fill();
-    })();
+    }
+
+    // 2. GESTIÓN DE VISTAS
+    const viewInicio = document.getElementById('view-inicio');
+    const viewProject = document.getElementById('view-project');
+    const viewDom = document.getElementById('view-dom');
+
+    const btnNavInicio = document.getElementById('btn-nav-inicio');
+    const btnNavDom = document.getElementById('btn-nav-dom');
+    const sketchContainer = document.getElementById('sketch-container');
+    const projectTitleDisplay = document.getElementById('projectTitleDisplay');
+    const projectCodeText = document.getElementById('projectCodeText');
+    const btnRedrawProject = document.getElementById('btnRedrawProject');
+    const btnSaveProject = document.getElementById('btnSaveProject');
+
+    let currentP5Instance = null;
+    let currentFileName = 'proyecto';
+
+    function destroyP5() {
+      if (currentP5Instance) {
+        currentP5Instance.remove();
+        currentP5Instance = null;
+      }
+      window._currentSetup = null;
+      window._currentDraw = null;
+      window.resetAnimation = null;
+      if (sketchContainer) sketchContainer.innerHTML = '';
+    }
+
+    function switchView(viewName) {
+      if (viewName !== 'project') {
+        destroyP5();
+      }
+
+      viewInicio.style.display = viewName === 'inicio' ? 'flex' : 'none';
+      viewProject.style.display = viewName === 'project' ? 'flex' : 'none';
+      viewDom.style.display = viewName === 'dom' ? 'flex' : 'none';
+
+      document.querySelectorAll('.submenu-item, .nav-item').forEach(el => el.classList.remove('active'));
+
+      if (viewName === 'inicio') btnNavInicio.classList.add('active');
+      if (viewName === 'dom') {
+        btnNavDom.classList.add('active');
+        inspectSelectedPage(document.getElementById('domPageSelect').value);
+      }
+    }
+
+    btnNavInicio.addEventListener('click', (e) => {
+      e.preventDefault();
+      switchView('inicio');
+    });
+
+    btnNavDom.addEventListener('click', () => {
+      switchView('dom');
+    });
+
+    document.querySelectorAll('.btn-to-home').forEach(btn => {
+      btn.addEventListener('click', () => switchView('inicio'));
+    });
+
+    // 3. CARGADOR DINÁMICO DE PROYECTOS (p5 activo)
+    async function loadProjectFile(filePath, titleText) {
+      try {
+        switchView('project');
+        destroyP5();
+
+        currentFileName = filePath.split('/').pop().replace('.html', '');
+        projectTitleDisplay.textContent = titleText;
+
+        const res = await fetch(filePath);
+        const html = await res.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        const codeElement = doc.querySelector('section.card pre code, pre code');
+        projectCodeText.textContent = codeElement ? codeElement.textContent.trim() : '';
+
+        const scripts = doc.querySelectorAll('script:not([src])');
+        let scriptContent = '';
+        scripts.forEach(s => {
+          if (s.textContent.includes('function setup') || s.textContent.includes('function draw') || s.textContent.includes('draw = function')) {
+            scriptContent = s.textContent;
+          }
+        });
+
+        currentP5Instance = new p5((p) => {
+          const p5Methods = [
+            'createCanvas', 'noLoop', 'loop', 'redraw', 'background', 'fill', 'noFill',
+            'stroke', 'noStroke', 'strokeWeight', 'ellipse', 'rect', 'line', 'point',
+            'triangle', 'quad', 'arc', 'circle', 'square', 'saveCanvas', 'color',
+            'beginShape', 'endShape', 'vertex', 'push', 'pop', 'translate', 'rotate', 'scale'
+          ];
+          p5Methods.forEach(m => {
+            if (typeof p[m] === 'function') {
+              window[m] = p[m].bind(p);
+            }
+          });
+
+          const runner = new Function(
+            scriptContent +
+            '\nif(typeof setup === "function") window._currentSetup = setup;' +
+            '\nif(typeof draw === "function") window._currentDraw = draw;' +
+            '\nif(typeof resetAnimation === "function") window.resetAnimation = resetAnimation;'
+          );
+          runner();
+
+          p.setup = function() {
+            if (window._currentSetup) window._currentSetup();
+          };
+          p.draw = function() {
+            if (window._currentDraw) window._currentDraw();
+          };
+        }, sketchContainer);
+
+      } catch (err) {
+        console.error("Error al cargar proyecto:", err);
+      }
+    }
+
+    // Botones de acción del lienzo
+    btnRedrawProject.addEventListener('click', () => {
+      if (typeof window.resetAnimation === 'function') {
+        window.resetAnimation();
+      } else if (currentP5Instance) {
+        currentP5Instance.redraw();
+      }
+    });
+
+    btnSaveProject.addEventListener('click', () => {
+      if (currentP5Instance) currentP5Instance.saveCanvas(currentFileName, 'png');
+    });
+
+    // Eventos a los botones de submenús (Práctica 1 y Práctica 2)
+    document.querySelectorAll('.submenu-item[data-file]').forEach(item => {
+      item.addEventListener('click', () => {
+        document.querySelectorAll('.submenu-item, .nav-item').forEach(el => el.classList.remove('active'));
+        item.classList.add('active');
+        loadProjectFile(item.getAttribute('data-file'), item.textContent.trim());
+      });
+    });
+
+    // Acordeón
+    document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        trigger.parentElement.classList.toggle('open');
+      });
+    });
+
+    // ================= 4. MOTOR GRÁFICO DOM INSPECTOR =================
+    const domCanvas = document.getElementById('domCanvas');
+    const domCtx = domCanvas.getContext('2d');
+    const domSelect = document.getElementById('domPageSelect');
+    const domNodeCount = document.getElementById('domNodeCount');
+    const domScrollContainer = document.getElementById('domScrollContainer');
+
+    const IGNORED = new Set(['META', 'TITLE', '#text', '#comment']);
+
+    function parseDOMNode(element) {
+      let label = '<' + element.tagName.toLowerCase();
+      if (element.id) {
+        label += '#' + element.id;
+      } else if (element.classList.length > 0) {
+        label += '.' + Array.from(element.classList).join('.');
+      } else if (element.tagName === 'LINK') {
+        const href = element.getAttribute('href') || '';
+        label += ' ' + href.split('/').pop();
+      } else if (element.tagName === 'SCRIPT') {
+        const src = element.getAttribute('src') || '';
+        if (src.includes('p5')) label += ' (p5.js)';
+      }
+      label += '>';
+
+      const children = [];
+      Array.from(element.children).forEach(child => {
+        if (!IGNORED.has(child.tagName)) {
+          children.push(parseDOMNode(child));
+        }
+      });
+
+      return { label, children, width: 0, x: 0, y: 0 };
+    }
+
+    function layoutTree(node, depth = 0) {
+      const boxWidth = Math.max(90, node.label.length * 7.5 + 24);
+      node.boxWidth = boxWidth;
+      node.boxHeight = 36;
+      node.depth = depth;
+
+      if (node.children.length === 0) {
+        node.totalWidth = boxWidth + 24;
+        return;
+      }
+
+      let total = 0;
+      node.children.forEach(c => {
+        layoutTree(c, depth + 1);
+        total += c.totalWidth;
+      });
+
+      node.totalWidth = Math.max(boxWidth + 24, total);
+    }
+
+    function positionTree(node, startX, startY, levelHeight = 72) {
+      node.y = startY + node.depth * levelHeight;
+      node.x = startX + node.totalWidth / 2;
+
+      let currentX = startX;
+      node.children.forEach(c => {
+        positionTree(c, currentX, startY, levelHeight);
+        currentX += c.totalWidth;
+      });
+    }
+
+    function getBounds(node) {
+      let minX = node.x - node.boxWidth / 2;
+      let maxX = node.x + node.boxWidth / 2;
+      let maxY = node.y + node.boxHeight;
+
+      node.children.forEach(c => {
+        const b = getBounds(c);
+        minX = Math.min(minX, b.minX);
+        maxX = Math.max(maxX, b.maxX);
+        maxY = Math.max(maxY, b.maxY);
+      });
+
+      return { minX, maxX, maxY };
+    }
+
+    function drawNode(node, offsetX, offsetY) {
+      const nx = node.x + offsetX;
+      const ny = node.y + offsetY;
+
+      node.children.forEach(child => {
+        const cx = child.x + offsetX;
+        const cy = child.y + offsetY;
+
+        domCtx.strokeStyle = '#6366f1';
+        domCtx.lineWidth = 1.5;
+
+        const midY = ny + node.boxHeight + (cy - (ny + node.boxHeight)) / 2;
+
+        domCtx.beginPath();
+        domCtx.moveTo(nx, ny + node.boxHeight);
+        domCtx.lineTo(nx, midY);
+        domCtx.lineTo(cx, midY);
+        domCtx.lineTo(cx, cy);
+        domCtx.stroke();
+
+        drawNode(child, offsetX, offsetY);
+      });
+
+      const rx = nx - node.boxWidth / 2;
+      const ry = ny;
+
+      domCtx.fillStyle = '#1e1f2b';
+      domCtx.beginPath();
+      domCtx.roundRect(rx, ry, node.boxWidth, node.boxHeight, 8);
+      domCtx.fill();
+
+      domCtx.strokeStyle = '#4f46e5';
+      domCtx.lineWidth = 1.2;
+      domCtx.stroke();
+
+      domCtx.fillStyle = '#c7d2fe';
+      domCtx.font = '12px ui-monospace, Menlo, Consolas, monospace';
+      domCtx.textAlign = 'center';
+      domCtx.textBaseline = 'middle';
+      domCtx.fillText(node.label, nx, ny + node.boxHeight / 2);
+    }
+
+    function countNodes(node) {
+      let count = 1;
+      node.children.forEach(c => count += countNodes(c));
+      return count;
+    }
+
+    async function inspectSelectedPage(url) {
+      try {
+        domNodeCount.textContent = 'Analizando estructura...';
+        const res = await fetch(url);
+        const html = await res.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        const root = parseDOMNode(doc.documentElement);
+        layoutTree(root);
+        positionTree(root, 0, 0);
+
+        const bounds = getBounds(root);
+        const padding = 60;
+
+        const w = Math.ceil(bounds.maxX - bounds.minX + padding * 2);
+        const h = Math.ceil(bounds.maxY + padding * 2);
+
+        const dpr = window.devicePixelRatio || 1;
+        domCanvas.width = w * dpr;
+        domCanvas.height = h * dpr;
+        domCanvas.style.width = w + 'px';
+        domCanvas.style.height = h + 'px';
+
+        domCtx.resetTransform();
+        domCtx.scale(dpr, dpr);
+        domCtx.clearRect(0, 0, w, h);
+
+        const offsetX = -bounds.minX + padding;
+        const offsetY = padding;
+
+        drawNode(root, offsetX, offsetY);
+
+        setTimeout(() => {
+          domScrollContainer.scrollLeft = (w - domScrollContainer.clientWidth) / 2;
+        }, 50);
+
+        domNodeCount.textContent = `Nodos totales inspeccionados: ${countNodes(root)}`;
+      } catch (e) {
+        console.error(e);
+        domNodeCount.textContent = 'Error al cargar el archivo.';
+      }
+    }
+
+    domSelect.addEventListener('change', () => inspectSelectedPage(domSelect.value));
   </script>
 </body>
 </html>
